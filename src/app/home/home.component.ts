@@ -62,6 +62,32 @@ export class HomeComponent implements OnInit{
     });
   }
 
+
+  getAllDetails() {
+    this.filmservice.getAllMovies().subscribe((data: any[]) => {
+      const allMovies = data.flat(); // Flatten the array of movies
+
+      this.films = allMovies;
+      this.filmsfiltred = allMovies;
+      this.all_ids = allMovies.map(film => film.id);
+
+      // Now that all_ids is defined, you can make the specific API call
+      if (this.all_ids.length > 0) {
+        const requests = this.all_ids.map(id => this.filmservice.getPopularMoviesById(id));
+
+        forkJoin(requests).subscribe((results) => {
+          results.forEach((result, index) => {
+            this.id_gender.push({ "idfilm": this.all_ids[index], "genre": result.genres });
+          });
+        });
+      }
+    });
+  }
+
+
+
+
+
   getUrl(name : any){
     return this.filmservice.getimagefromapi(name);
   }
@@ -88,18 +114,7 @@ export class HomeComponent implements OnInit{
       this.filmsfiltred = this.films;  // If no genre is selected, display all films
       return;
     }
-    /*
-    const matchingIds = this.id_gender
-      .filter(entry => entry.genre.some(genreObj => genreObj.name.toLowerCase() === genre.toLowerCase()))
-      .map(entry => entry.idfilm);
 
-    console.log("matchingid", matchingIds);
-
-    /*
-    this.filmsfiltred = this.films
-      .filter((film) => matchingIds.includes(film.id));*/
-
-    console.log("Filtered films:", this.filmsfiltred);
 
   }
 }

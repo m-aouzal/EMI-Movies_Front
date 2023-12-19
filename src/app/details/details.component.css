@@ -46,6 +46,9 @@ h2 {
   }
 }
 
+
+
+
 /* Custom styles for NgxEditor */
 .ngx-editor-toolbar {
   background-color: #8d0b0b; /* Dark background color for toolbar */
@@ -57,20 +60,59 @@ h2 {
   background-color: #ffffff; /* Editor content background color */
 }
 
+/* Custom styles for Film Details */
+.container {
+  padding-top: 20px;
+  background-color: #000; /* Netflix background color */
+  color: #fff; /* Text color */
+}
 
+/* Style the comment form */
+.form-label {
+  font-weight: bold;
+  color: white;
+}
 
+.form-control {
+  background-color: #333;
+  color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+/* Comment submission button */
+.btn-primary {
+  background-color: #e50914; /* Netflix red color */
+  color: #fff;
+  border-radius: 4px;
+  padding: 8px 20px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #ff0f23; /* Darker red on hover */
+}
+
+/* Style the comment section */
 .comment-section {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  background-color: #000; /* Updated background color */
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 30px;
+  margin-left: -15px; /* Adjust the left margin to pull the section slightly to the left */
+  margin-right: -15px; /* Adjust the right margin to match the left */
 }
 
 .comment {
-  background-color: #141414;
-  color: #fff;
-  border-radius: 8px;
+  margin-bottom: 20px;
   padding: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #222; /* Darker background */
+  border-radius: 8px;
+  margin-left: 0; /* Reset left margin */
+  margin-right: 0; /* Reset right margin */
 }
 
 .comment-header {
@@ -79,15 +121,31 @@ h2 {
   align-items: center;
   margin-bottom: 10px;
 }
+.comment-header strong {
+  color: white;
+  font-weight: bold;
+}
 
 .comment-header button {
-  padding: 5px 10px;
+  background-color: #e50914;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+.comment-body {
+  color: white;
 }
 
 .comment-body p {
   margin: 0;
-  font-size: 0.9rem;
 }
+
+.comment-body p {
+  margin: 0;
+}
+
 
 
 

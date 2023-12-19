@@ -48,12 +48,12 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-md-8">
-      <h3 class="mb-3">Comments</h3>
+      <h3 class="mb-3"></h3>
       <!-- Add a form for submitting comments -->
       <form (ngSubmit)="submit_commentaire()">
         <div class="mb-3">
-          <label for="nom" class="form-label">Your Name</label>
-          <input type="text" class="form-control" id="nom" [(ngModel)]="formData.nom" name="nom" required >
+          <label for="nom" class="form-label" >Title</label>
+          <input type="text" class="form-control" id="nom" [(ngModel)]="formData.nom" name="nom" required placeholder="Enter a Title"  >
         </div>
         <div class="mb-3">
           <label for="comment" class="form-label">Leave a Comment:</label>
@@ -79,7 +79,7 @@
 
   </div>
   <div class="container mt-4 mb-4">
-    <h3 class="mb-3">Comments</h3>
+    <h3 class="form-label">Comments Section</h3>
     <div class="comment-section">
       <div *ngFor="let comment of commentaireFiltred" class="comment">
         <div class="comment-header">

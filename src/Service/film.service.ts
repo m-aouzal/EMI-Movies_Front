@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Film } from "../Model/film";
 import {HttpClient} from "@angular/common/http";
-import {map, Observable} from "rxjs";
+import {forkJoin, map, mergeMap, Observable, of, toArray} from "rxjs";
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +31,7 @@ export class FilmService {
     return this.http.get<any>(`${this.baseurl}?api_key=${this.apikey}`);
   }
 
+
   getPopularMoviesById(id: number): Observable<any> {
     const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${this.apikey}`;
     return this.http.get<any>(url);
@@ -43,4 +44,37 @@ export class FilmService {
     const url = `https://api.themoviedb.org/3/search/movie?api_key=${this.apikey}&language=en-US&query=${moviePrefix}%20&page=1&include_adult=true`
     return this.http.get<any>(url).pipe(map((res: any) => res.results))
   }
+
+
+
+  getAllMovies(): Observable<any[]> {
+    const popularMoviesUrl = `${this.baseurl}?api_key=${this.apikey}&page=1`;
+
+    return this.http.get<any>(popularMoviesUrl).pipe(
+      mergeMap((initialResponse: any) => {
+        const totalPages = initialResponse.total_pages;
+        const requests = [];
+
+        for (let page = 1; page <= totalPages; page++) {
+          requests.push(this.http.get<any>(`${this.baseurl}?api_key=${this.apikey}&page=${page}`));
+        }
+
+        return forkJoin(requests);
+      }),
+      mergeMap((responses: any[]) => responses),
+      map((response: any) => response.results),
+      toArray()
+    );
+  }
+
+
+
+
+
+
+
+
 }
+
+
+
