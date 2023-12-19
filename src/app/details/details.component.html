@@ -41,6 +41,10 @@
   </div>
 </div>
 
+
+
+
+
 <div class="container mt-4">
   <div class="row">
     <div class="col-md-8">
@@ -75,48 +79,20 @@
 
   </div>
   <div class="container mt-4 mb-4">
-    <div class="row">
-      <div class="col-md-10 offset-md-1">
-        <h3 class="mb-3">Comments</h3>
-        <ul class="list-group">
-          <li class="list-group-item" *ngFor="let comment of commentaireFiltred">
-            <div class="card mb-2">
-              <div class="card-body">
-                <p class="card-text">
-                  <strong>Name:</strong> {{ comment.name }}
-                </p>
-                <div class="card-text" [innerHTML]="sanitizeHTML(comment.commentaire)"></div>
-                <!-- Add a button to delete the message -->
-                <button type="button" class="btn btn-danger" (click)="deleteComment(comment.id)">
-                  Delete
-                </button>
-              </div>
-            </div>
-          </li>
-        </ul>
+    <h3 class="mb-3">Comments</h3>
+    <div class="comment-section">
+      <div *ngFor="let comment of commentaireFiltred" class="comment">
+        <div class="comment-header">
+          <strong>{{ comment.name }}</strong>
+          <button type="button" class="btn btn-danger" (click)="deleteComment(comment.id)">
+            Delete
+          </button>
+        </div>
+        <div class="comment-body">
+          <p [innerHTML]="sanitizeHTML(comment.commentaire)"></p>
+        </div>
       </div>
     </div>
   </div>
 
-
-  <!--  <div class="comments-container mt-4 mb-4">
-      <h3 class="comments-heading">Comments</h3>
-      <div class="comment-list">
-        <div class="comment" *ngFor="let comment of commentaireFiltred">
-          <div class="comment-header">
-            <strong class="comment-name">{{ comment.name }}</strong>
-            <button type="button" class="btn btn-danger" (click)="deleteComment(comment.id)">
-              Delete
-            </button>
-          </div>
-          <div class="comment-content" [innerHTML]="sanitizeHTML(comment.commentaire)"></div>
-        </div>
-      </div>
-    </div>-->
-
-
-
-
-
-
-</div>
+  </div>

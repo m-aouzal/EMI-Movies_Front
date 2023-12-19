@@ -9,3 +9,28 @@
   min-height: 100vh;
   overflow-x: hidden;
 }
+body {
+  background-color: black;
+  color: white; /* Optionally change text color to white for better visibility */
+}
+
+.bg-black {
+  background-color: black !important;
+}
+
+.emi-movies-logo {
+  font-weight: bold;
+  font-size: 2.2rem; /* Adjust size as needed */
+  padding-right: 100px;
+  text-align: right; /* Align the text to the right */
+
+}
+
+.emi {
+  color: white; /* White color for 'EMI' */
+}
+
+.movies {
+  color: #ff0000; /* Red color for 'MOVIES' */
+  font-weight: bold; /* Optionally increase font weight */
+}
