@@ -1,55 +1,71 @@
-body {
-  padding: 20px;
+/* Custom styles for the movie cards */
+.movie-card {
+  width: 300px; /* Increased width */
+  margin: 20px auto; /* Margin auto to center */
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Slightly darker shadow */
+}
+.row {
+  display: flex;
+  justify-content: center;
 }
 
-/* Custom styles for the card */
-.card {
-  width: 18rem; /* Adjust the width as needed */
-  height: auto; /* Adjust the height as needed */
+.poster-img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
 }
 
-
-.card-img-top {
-  height: 300px; /* Adjust the image height as needed */
-  object-fit: cover;
-}
-/* your-component.component.css */
-
-.card {
-  border: none; /* Remove card border for a cleaner look */
-  transition: transform 0.3s ease; /* Add a smooth transition effect */
-
-  /* Customize card shadow if needed */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.poster-img:hover {
+  transform: scale(1.05); /* Slightly smaller scale on hover */
 }
 
-.card:hover {
-  transform: scale(1.02); /* Zoom in a bit on hover */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6); /* Slightly darker overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.card-img-top {
-  max-height: 300px; /* Set a maximum height for the image */
-  object-fit: cover; /* Maintain aspect ratio and cover the container */
+.movie-card:hover .overlay {
+  opacity: 1;
 }
 
-.card-body {
-  padding: 1.25rem; /* Add some padding to the card body */
+.detail {
+  text-decoration: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
 }
 
-.card-title {
-  font-size: 1.25rem; /* Increase title font size */
-  margin-bottom: 0.5rem; /* Add some space below the title */
+.movie-details {
+  padding: 12px;
 }
 
-.card-text {
-  color: #6c757d; /* Use a slightly muted color for additional text */
-  font-size: 0.9rem; /* Adjust text size */
+.movie-title {
+  margin-bottom: 5px;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
-.favorite-button {
-  color: red; /* Make the favorite button red */
+.release-date,
+.vote-average {
+  font-size: 0.9rem;
+  margin-bottom: 3px;
 }
 
-.favorite-icon {
-  font-size: 1.5rem; /* Adjust icon size */
+/* Adjustments for responsiveness */
+@media (max-width: 768px) {
+  .movie-card {
+    width: 180px; /* Adjusted width for smaller screens */
+  }
 }

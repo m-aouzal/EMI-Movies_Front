@@ -1,11 +1,43 @@
-
-/* Custom styles for the card */
-.card {
-  width: 18rem; /* Adjust the width as needed */
-  height: auto; /* Adjust the height as needed */
+.container {
+  padding-top: 20px;
+  background-color: #000; /* Netflix background color */
+  color: #fff; /* Text color */
 }
 
-.card-img-top {
-  height: 300px; /* Adjust the image height as needed */
-  object-fit: cover;
+.d-flex {
+  margin-bottom: 20px;
+}
+
+
+.custom-input,
+.custom-select {
+  height: 40px;
+  line-height: 1.5;
+  border: none; /* Remove border */
+  border-radius: 4px; /* Add slight border radius */
+  padding: 8px;
+  width: 500px;
+  flex-grow: 1;
+  color: #fff; /* Text color */
+  background-color: rgb(255, 255, 255); /* Background color */
+}
+
+.custom-btn {
+  background-color: #e50914; /* Netflix red color */
+  color: #fff;
+  border-radius: 4px; /* Add slight border radius */
+  padding: 8px 20px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.custom-btn:hover {
+  background-color: #ff0f23; /* Darker red on hover */
+}
+
+/* Adjustments for responsiveness */
+@media (max-width: 576px) {
+  .d-flex {
+    flex-direction: column;
+  }
 }
