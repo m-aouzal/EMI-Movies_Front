@@ -34,3 +34,40 @@ body {
   color: #ff0000; /* Red color for 'MOVIES' */
   font-weight: bold; /* Optionally increase font weight */
 }
+body {
+  background-color: black;
+  color: white;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 2.2rem;
+  padding-right: 40px;
+  text-align: right;
+  color: white;
+}
+
+.navbar-nav .nav-item .nav-link {
+  font-size: 1.2rem;
+  padding: 8px 20px;
+  color: #9c9c9c;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+  color: #ffcc00;
+}
+
+.active .nav-link {
+  color: #ffcc00 !important;
+  font-weight: bold;
+}
+
+.emi {
+  color: white;
+}
+
+.movies {
+  color: #ff0000;
+  font-weight: bold;
+}
