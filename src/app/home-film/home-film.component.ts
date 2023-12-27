@@ -1,10 +1,11 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Film} from "../../Model/film";
 import {FilmService} from "../../Service/film.service";
 import {DetailsComponent} from "../details/details.component";
 import {RouterLink} from "@angular/router";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
+import {findLastMappingIndexBefore} from "@angular/compiler-cli/src/ngtsc/sourcemaps/src/source_file";
 
 
 @Component({
@@ -20,21 +21,25 @@ import {MatIconModule} from "@angular/material/icon";
 })
 export class HomeFilmComponent {
   @Input() film!: Film;
-  constructor(private filmService :FilmService) { }
-  getUrl(name : any){
+  @Output() favoriteRemoved: EventEmitter<number> = new EventEmitter<number>();
+
+  constructor(private filmService: FilmService) { }
+
+  ngOnInit(): void {
+    this.checkFavoriteStatus(this.film);
+  }
+
+  getUrl(name: any) {
     return this.filmService.getimagefromapi(name);
   }
 
-  isFavorite: boolean = false;
+  toggleFavorite(film: Film) {
+    film.favorite = !film.favorite;
 
-
-  toggleFavorite() {
-    this.isFavorite = !this.isFavorite;
-
-    if (this.isFavorite) {
-      this.filmService.addFavoriteMovie(this.film.id).subscribe(
+    if (film.favorite) {
+      this.filmService.addFavoriteMovie(film.id).subscribe(
         () => {
-          console.log('Movie added to favorites:', this.film.id);
+          console.log('Movie added to favorites:', film.id);
           // Handle success if needed
         },
         (error) => {
@@ -43,9 +48,10 @@ export class HomeFilmComponent {
         }
       );
     } else {
-      this.filmService.removeFavoriteMovie(this.film.id).subscribe(
+      this.filmService.removeFavoriteMovie(film.id).subscribe(
         () => {
-          console.log('Movie removed from favorites:', this.film.id);
+          console.log('Movie removed from favorites: AAAAAAAAAAAA', film.id);
+          this.favoriteRemoved.emit(film.id); // Emit event for favorite removal
           // Handle success if needed
         },
         (error) => {
@@ -54,6 +60,22 @@ export class HomeFilmComponent {
         }
       );
     }
+  }
+
+  checkFavoriteStatus(film: Film) {
+    this.filmService.getFavoriteMovieIds().subscribe(
+      (favoriteMovieIds: number[]) => {
+        if (favoriteMovieIds.includes(film.id)) {
+          film.favorite = true; // Movie is already a favorite
+        } else {
+          film.favorite = false; // Movie is not a favorite
+        }
+      },
+      (error) => {
+        console.error('Error retrieving favorite movie IDs:', error);
+        // Handle error if needed
+      }
+    );
   }
 
   // Optionally, you can implement a method to check if the movie is a favorite and set isFavorite accordingly

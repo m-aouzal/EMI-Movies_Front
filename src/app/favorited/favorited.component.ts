@@ -26,6 +26,7 @@ export class FavoritedComponent implements OnInit {
   favoriteMovieIds: number[] = [];
   favoriteMovies: Film[] = [];
 
+
   constructor(private filmService: FilmService) { }
 
   ngOnInit(): void {
@@ -84,7 +85,16 @@ export class FavoritedComponent implements OnInit {
     }
   }
 
+  onFavoriteRemoved(movieId: number) {
+    console.log('Removing favorite movie with ID:', movieId);
 
+    // Find the index of the movie to remove from the favoriteMovies array
+    const indexToRemove = this.favoriteMovies.findIndex(movie => movie.id === movieId);
 
+    if (indexToRemove !== -1) {
+      // Remove the movie from the favoriteMovies array
+      this.favoriteMovies.splice(indexToRemove, 1);
+    }
+  }
 
 }
