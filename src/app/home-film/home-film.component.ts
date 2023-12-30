@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Film} from "../../Model/film";
-import {FilmService} from "../../Service/film.service";
+import {Film} from "../Model/film";
+import {FilmService} from "../Service/film.service";
 import {DetailsComponent} from "../details/details.component";
 import {RouterLink} from "@angular/router";
 import {MatButtonModule} from "@angular/material/button";

@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import { FilmService } from "../../Service/film.service";
-import { Filmdetails } from "../../Model/filmdetails";
-import { Genre } from "../../Model/genre";
+import { FilmService } from "../Service/film.service";
+import { Filmdetails } from "../Model/filmdetails";
+import { Genre } from "../Model/genre";
 import { CommonModule } from "@angular/common";
 import { Editor, NgxEditorModule, Validators } from 'ngx-editor';
 import {FormBuilder, FormControl, FormGroup, FormsModule} from "@angular/forms";
-import {Commentaire} from "../../Model/Commentaire";
+import {Commentaire} from "../Model/Commentaire";
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 

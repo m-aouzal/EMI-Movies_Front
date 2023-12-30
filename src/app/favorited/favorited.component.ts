@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Film } from '../../Model/film';
-import { FilmService } from '../../Service/film.service';
+import { Film } from '../Model/film';
+import { FilmService } from '../Service/film.service';
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {forkJoin} from "rxjs";

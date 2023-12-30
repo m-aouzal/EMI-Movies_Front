@@ -1,11 +1,11 @@
 import {Component, inject, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Film } from "../../Model/film";
-import { FilmService } from "../../Service/film.service";
+import { Film } from "../Model/film";
+import { FilmService } from "../Service/film.service";
 import {HomeFilmComponent} from "../home-film/home-film.component";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
-import {Filmdetails} from "../../Model/filmdetails";
+import {Filmdetails} from "../Model/filmdetails";
 import {forkJoin} from "rxjs";
 
 
