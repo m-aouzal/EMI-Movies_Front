@@ -6,8 +6,11 @@
     </div>
   </div>
   <div class="movie-details">
-    <h5 class="movie-title">{{ film.title }}</h5>
+    <h3 class="movie-title">{{ film.title }}</h3>
     <p class="release-date">Release Date: {{ film.release_date }}</p>
     <p class="vote-average">Vote Average: {{ film.vote_average }}</p>
+    <button mat-icon-button (click)="toggleFavorite(film)">
+      <mat-icon  class="text-danger">{{ film.favorite ? 'favorite' : 'favorite_border' }}</mat-icon>
+    </button>
   </div>
 </div>

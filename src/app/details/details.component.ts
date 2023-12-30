@@ -5,7 +5,7 @@ import { Filmdetails } from "../../Model/filmdetails";
 import { Genre } from "../../Model/genre";
 import { CommonModule } from "@angular/common";
 import { Editor, NgxEditorModule, Validators } from 'ngx-editor';
-import {FormControl, FormGroup, FormsModule} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, FormsModule} from "@angular/forms";
 import {Commentaire} from "../../Model/Commentaire";
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
@@ -18,31 +18,41 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit, OnDestroy {
-  constructor(private filmservice: FilmService, private activatedRoute: ActivatedRoute,private sanitizer: DomSanitizer) {
-  }
 
   formData: { nom: string, comment: string } = { nom: '', comment: '' };
+  form : FormGroup;
+  constructor(
+    private filmservice: FilmService,
+    private activatedRoute: ActivatedRoute,
+    private sanitizer: DomSanitizer,
+    private formBuilder: FormBuilder)  {
+    this.form = this.formBuilder.group({
+      nom: ['', Validators.required], // Add validators for required fields
+      comment: ['', Validators.required], // Add validators for required fields
+    });
+  }
+
+
 
   submit_commentaire(){
-    const commentData = {
-      idfilm: this.filmId,
-      name: this.formData.nom,
-      commentaire: this.formData.comment
-    };
-    console.log(commentData)
-    this.filmservice.addComment(commentData).subscribe(
-      (response) => {
-        // Handle success if needed
-        console.log('Comment added successfully', response);
-        // Refresh comment data after adding a new comment
-        this.getCommentaireFiltred(this.filmId);
-      },
-      (error) => {
-        // Handle error if needed
-        console.error('Error adding comment', error);
-      }
-    );
-  }
+
+      const commentData = {
+        idfilm: this.filmId,
+        name: this.formData.nom,
+        commentaire: this.formData.comment
+      };
+      console.log(commentData)
+      this.filmservice.addComment(commentData).subscribe(
+        (response) => {
+          console.log('Comment added successfully', response);
+          this.getCommentaireFiltred(this.filmId);
+        },
+        (error) => {
+          console.error('Error adding comment', error);
+        }
+      );
+    }
+
 
 
   filmdetails!: Filmdetails;
@@ -55,16 +65,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
   //text editor
   editor!: Editor;
   html: string = 'hello world';
-  form = new FormGroup({
+  /*form = new FormGroup({
     editorContent: new FormControl('', Validators.required()),
-  });
-  submitEditorContent() {
-    // Access the content using the editor's content property
-    const editorContent = this.html;
-
-    // Do something with the content, e.g., send it to the server or log it
-    console.log('Editor content submitted:',);
-  }
+  });*/
 
   getPopularMoviesById() {//get details
     this.filmservice.getPopularMoviesById(this.activatedRoute.snapshot.params["id"]).

@@ -13,6 +13,39 @@ export class FilmService {
   apikey = "4722616a8836f0b929a9cb3a04f6a6a4";
 
   secondBaseUrl="http://localhost:9999/Commentaire"
+  private favoritesUrl = 'http://localhost:9999/api';
+
+
+  extractMovieIdsFromFavorites(favoriteMovies: any[]): number[] {
+    return favoriteMovies.map((favorite) => favorite.movieId);
+  }
+  // Get favorite movie IDs
+  getFavoriteMovieIds(): Observable<number[]> {
+    return this.http.get<any[]>(`${this.favoritesUrl}/favorite`).pipe(
+      map((response: any[]) => {
+        console.log('Received favorite movies:', response);
+
+        const movieIds = this.extractMovieIdsFromFavorites(response);
+        console.log('Extracted movie IDs:', movieIds);
+
+        return movieIds; // Return extracted movie IDs
+      })
+    );
+  }
+
+  // Add a movie to favorites
+  addFavoriteMovie(movieId: number): Observable<any> {
+    return this.http.post<any>(`${this.favoritesUrl}/add/${movieId}`, {});
+  }
+
+  // Remove a movie from favorites
+  removeFavoriteMovie(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.favoritesUrl}/delete/${id}`);
+  }
+
+
+
+
 
   getCommentaire():Observable<any>{
     return this.http.get<any>(`${this.secondBaseUrl}/commentaires`)
@@ -28,14 +61,14 @@ export class FilmService {
   }
 
   getPopularMovies(): Observable<any> {
-    return this.http.get<any>(`${this.baseurl}?api_key=${this.apikey}`);
+    return this.http.get<any>(`${this.baseurl}?api_key=${this.apikey}&page=4`);
   }
 
 
   getPopularMoviesById(id: number): Observable<any> {
     const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${this.apikey}`;
     return this.http.get<any>(url);
-    console.log(url)
+
   }
   getimagefromapi( poster_path: string){
     return 'https://image.tmdb.org/t/p/w300' + poster_path
@@ -66,6 +99,8 @@ export class FilmService {
       toArray()
     );
   }
+
+
 
 
 

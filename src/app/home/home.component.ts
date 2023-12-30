@@ -63,26 +63,26 @@ export class HomeComponent implements OnInit{
   }
 
 
-  getAllDetails() {
-    this.filmservice.getAllMovies().subscribe((data: any[]) => {
-      const allMovies = data.flat(); // Flatten the array of movies
-
-      this.films = allMovies;
-      this.filmsfiltred = allMovies;
-      this.all_ids = allMovies.map(film => film.id);
-
-      // Now that all_ids is defined, you can make the specific API call
-      if (this.all_ids.length > 0) {
-        const requests = this.all_ids.map(id => this.filmservice.getPopularMoviesById(id));
-
-        forkJoin(requests).subscribe((results) => {
-          results.forEach((result, index) => {
-            this.id_gender.push({ "idfilm": this.all_ids[index], "genre": result.genres });
-          });
-        });
-      }
-    });
-  }
+  // /*getAllDetails() {
+  //   this.filmservice.getAllMovies().subscribe((data: any[]) => {
+  //     const allMovies = data.flat(); // Flatten the array of movies
+  //
+  //     this.films = allMovies;
+  //     this.filmsfiltred = allMovies;
+  //     this.all_ids = allMovies.map(film => film.id);
+  //
+  //     // Now that all_ids is defined, you can make the specific API call
+  //     if (this.all_ids.length > 0) {
+  //       const requests = this.all_ids.map(id => this.filmservice.getPopularMoviesById(id));
+  //
+  //       forkJoin(requests).subscribe((results) => {
+  //         results.forEach((result, index) => {
+  //           this.id_gender.push({ "idfilm": this.all_ids[index], "genre": result.genres });
+  //         });
+  //       });
+  //     }
+  //   });
+  // }*/
 
 
 
@@ -91,15 +91,17 @@ export class HomeComponent implements OnInit{
   getUrl(name : any){
     return this.filmservice.getimagefromapi(name);
   }
-  filterResults(text:string){
-    if(!text){
-      this.filmsfiltred=this.films
+  filterResults(text: string) {
+    if (!text) {
+      this.filmsfiltred = this.films;
       return;
     }
-    this.filmsfiltred=this.films.filter(
-      film =>film?.title.toLowerCase().includes(text.toLowerCase())
-    )
+
+    this.filmservice.searchMovies(text).subscribe((results) => {
+      this.filmsfiltred = results;
+    });
   }
+
   isFavorite: boolean = false;
 
   toggleFavorite() {
