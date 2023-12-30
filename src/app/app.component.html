@@ -40,7 +40,13 @@
         <a class="nav-link fs-5" [routerLink]="['/']">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link fs-5" href="#" [routerLink]="['/favorited']">Favorited</a>
+        <a class="nav-link fs-5" (click)="onOpenFavorites()">Favorited</a>
+      </li>
+      <li class="nav-item" *ngIf="isAuthenticated">
+        <a class="nav-link fs-5" (click)="onLogout()">Logout</a>
+      </li>
+      <li class="nav-item" *ngIf="!isAuthenticated">
+        <a class="nav-link fs-5" (click)="onLogin()">SingIn</a>
       </li>
     </ul>
 

@@ -50,7 +50,7 @@
     <div class="col-md-8">
       <h3 class="mb-3"></h3>
       <!-- Add a form for submitting comments -->
-      <form (ngSubmit)="submit_commentaire()">
+      <form >
         <div class="mb-3">
           <label for="nom" class="form-label" >Title</label>
           <input type="text" class="form-control" id="nom" [(ngModel)]="formData.nom" name="nom" required placeholder="Enter a Title"  >
@@ -73,7 +73,7 @@
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary" [disabled]="form.valid">Submit Comment</button>
+        <button type="submit" class="btn btn-primary" [disabled]="form.valid" (click)="onAddComment()" >Submit Comment</button>
       </form>
     </div>
 
