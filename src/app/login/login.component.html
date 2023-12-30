@@ -1,4 +1,9 @@
 <div class="login-container">
+  <app-alert
+    [message]="error"
+    *ngIf="error"
+    (close)="onHandleError()"
+  ></app-alert>
   <div class="login-form">
     <h1>Sign In</h1>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
